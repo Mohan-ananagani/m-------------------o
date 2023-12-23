@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table,th,td{
+        border:1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<body>
+    <a href="{{url_for('home')}}"><button type="back" class="btn btn-primary">back</button></a>
+    <center>
+        <table>
+            <tr>
+                <th>NOTE_Id</th>
+                <th>NAME</th>
+                <th>Date</th>
+                <th>View</th>
+                <th>Update</th>
+                <th>Delete</th>
+                <th>excel file</th>
+            </tr>
+            {% for i in count1 %}
+            <tr>
+    
+                <td>{{i[0]}}</td>
+                <td>{{i[1]}}</td>
+                <td>{{i[2]}}</td>
+                <td><a href="{{url_for('vnote',noteid=i[0])}}">View</a></td>
+                <td><a href="{{url_for('update',noteid=i[0])}}">Update</a></td>
+                <td><a href="{{url_for('delete',noteid=i[0])}}">Delete</a></td>
+                <td><a href="{{url_for('excell')}}">excel</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+
+</body>
+</html>

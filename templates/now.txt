@@ -1,0 +1,16 @@
+@app.route('/vfile/<fileid>',methods=['GET','POST'])
+def vfile(fileid):
+    if session.get('user'):
+        cursor=mydb.cursor(buffered=True)
+        cursor.execute('select file_extension,data from file where file_id=uuid_to_bin(%s)',[fileid])
+        ext,data=cursor.fetchone()
+        return render_template('viewf.html')
+    return render_template('tab.html')
+@app.route('/fdelete/<fileid>')
+def fdelete(fileid):
+    cursor=mydb.cursor(buffered=True)
+    cursor.execute('delete from file where file_id=uuid_to_bin(%s)',[fileid])
+    mydb.commit()
+    cursor.close()
+    flash('file have been deleted successfully')
+    return render_template('tab.html')
